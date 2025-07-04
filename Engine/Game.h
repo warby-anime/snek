@@ -47,7 +47,11 @@ private:
 	Graphics gfx;
 	/********************************/
 	/*  User Variables              */
+
+	FrameTimer ft;
+
 	GameSettings settings = "settings.txt";
+
 	Board brd;
 	Snake snek;
 	Location delta_loc = {1,0};
