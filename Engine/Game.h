@@ -25,7 +25,6 @@
 #include "Graphics.h"
 #include "Board.h"
 #include "Snake.h"
-#include "Goal.h"
 #include <random>
 #include "SoundEffect.h"
 #include "FrameTimer.h"
@@ -48,22 +47,28 @@ private:
 	Graphics gfx;
 	/********************************/
 	/*  User Variables              */
+
 	FrameTimer ft;
+
+	GameSettings settings = "settings.txt";
+
 	Board brd;
 	Snake snek;
 	Location delta_loc = {1,0};
 	std::mt19937 rng;
-	Goal goal;
+	FrameTimer ft;
 	SoundEffect sfxEat = SoundEffect( { L"Sounds\\Eat.wav" } );
 	SoundEffect sfxSlither = SoundEffect( { L"Sounds\\Slither0.wav",L"Sounds\\Slither1.wav",L"Sounds\\Slither2.wav" } );
 	Sound sndMusic = Sound( L"Sounds\\Music_Loop.wav",Sound::LoopType::AutoFullSound );
 	Sound sndTitle = Sound( L"Sounds\\Title.wav" );
-	Sound sndFart = Sound( L"Sounds\\Fart.wav" );
-	static constexpr int snekMovePeriodMin = 4;
-	int snekMovePeriod = 20;
-	int snekMoveCounter = 0;
-	static constexpr int snekSpeedupPeriod = 180;
-	int snekSpeedupCounter = 0;
+	SoundEffect sndFart = SoundEffect( { L"Sounds\\Fart.wav" } );
+	static constexpr float snekMovePeriodMin = 0.040f;
+	static constexpr float snekMovePeriodSpeedup = 0.15f;
+	int nPoison;
+	int nFood;
+	float snekMovePeriod = 0.4f;
+	float snekMoveCounter = 0.0f;
+	float snekSpeedupFactor;
 	bool gameIsOver = false;
 	bool gameIsStarted = false;
 	/********************************/
